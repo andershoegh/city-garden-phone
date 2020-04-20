@@ -27,5 +27,15 @@ class Firebase {
   getTasks = () => this.db.collection("alltasks").orderBy("gardenBoxId", "asc");
 
   getTaskDescription = () => this.db.collection("taskTemplate");
+
+  getEvents = () => this.db.collection('events').orderBy('startTime', 'asc');
+
+  eventSignUp = (id: string, name: string) =>
+    this.db
+    .collection('events')
+    .doc(id)
+    .update( {
+      attendees: firebase.firestore.FieldValue.arrayUnion(name)
+    });
 }
 export const firebase = new Firebase();
