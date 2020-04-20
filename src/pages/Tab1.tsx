@@ -2,19 +2,15 @@ import React, { useState, useEffect } from "react";
 import {
   IonPage,
   IonIcon,
-  IonItem,
-  IonRow,
   IonCard,
   IonCardSubtitle,
-  IonCol,
   IonCardTitle,
   IonCardHeader,
   IonCardContent,
-  IonText,
 } from "@ionic/react";
 import "./Tab1.css";
 import { firebase } from "../Utility/Firebase";
-import { construct, trashOutline } from "ionicons/icons";
+import { construct } from "ionicons/icons";
 
 const Tab1: React.FC = (props) => {
   const [taskAmount, setTaskAmount] = useState<Number>(1);
