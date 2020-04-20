@@ -1,3 +1,13 @@
 ion-content ion-toolbar {
   --background: translucent;
 }
+
+.card-div {
+  display: flex;
+  justify-content: center;
+}
+
+.icon {
+  height: 50px;
+  width: 50px;
+}

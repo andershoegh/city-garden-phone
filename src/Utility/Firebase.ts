@@ -28,4 +28,5 @@ class Firebase {
 
   getTaskDescription = () => this.db.collection("taskTemplate");
 }
+
 export const firebase = new Firebase();
