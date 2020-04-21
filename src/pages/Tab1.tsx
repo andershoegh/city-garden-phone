@@ -14,10 +14,11 @@ import {
 import "./Tab1.css";
 import { firebase } from "../Utility/Firebase";
 import { construct } from "ionicons/icons";
+import GardenTasks from '../components/GardenTasks';
 
 const Tab1: React.FC = (props) => {
   const [taskAmount, setTaskAmount] = useState<Number>(1);
-  const [tasksDoing, setTasksDoing] = useState<firebase.firestore.DocumentData[]>([]);
+  const [tasks, setTasks] = useState<firebase.firestore.DocumentData[]>([]);
 
   // onsnapshot == live updates
   useEffect(() => {
@@ -28,31 +29,12 @@ const Tab1: React.FC = (props) => {
       snapshot.forEach(doc => {
         tempArray = [...tempArray, doc.data()];
       });
-      setTasksDoing(tempArray)
+      setTasks(tempArray)
     });
     return () => {
       unsub();
     };
   }, []);
-
-  let tasks: string[];
-  tasks = [];
-  tasksDoing.forEach(task => {
-    if (!tasks.includes(task.taskTemplateId)) {
-      tasks.push(task.taskTemplateId);
-    }
-  });
-
-  let taskString = '';
-  tasks.forEach((task, index) => {
-    if (index < tasks.length - 2) {
-      taskString += task + ', ';
-    } else if (index === tasks.length - 2) {
-      taskString += task + ' and ';
-    } else {
-      taskString += task;
-    }
-  })
 
   return (
     <IonPage>
@@ -72,19 +54,7 @@ const Tab1: React.FC = (props) => {
             </IonCard>
           </IonCol>
         </IonRow>
-          {tasksDoing.length ? (
-            <IonRow>
-              <IonCol>
-                <IonCard>
-                  <IonCardContent>
-                    <span>
-                      Right now, people are {taskString} in the garden.
-                    </span>
-                  </IonCardContent>
-                </IonCard>
-              </IonCol>
-            </IonRow>
-          ) : null}
+          <GardenTasks tasks={tasks} />
       </IonGrid>
     </IonPage>
   );
