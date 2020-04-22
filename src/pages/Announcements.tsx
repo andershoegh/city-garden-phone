@@ -8,6 +8,7 @@ import {
   IonRow,
   IonGrid,
   IonCol,
+  IonContent,
 } from "@ionic/react";
 import "./Announcements.css";
 import { firebase } from "../Utility/Firebase";
@@ -31,28 +32,30 @@ const Announcements: React.FC = () => {
 
   return (
     <IonPage>
-      <IonGrid>
-        <IonRow>
-          {notes.length ? (
-            notes.map((note, index) =>
-              note.pinned ? (
-                <IonCol key={index} size="12">
-                  <IonCard className="announcementCard">
-                    <IonCardContent>
-                      <div className="card-div">
-                        <IonText className="ion-padding">{note.note}</IonText>
-                      </div>
-                      <IonCardSubtitle>- {note.author}</IonCardSubtitle>
-                    </IonCardContent>
-                  </IonCard>
-                </IonCol>
-              ) : null
-            )
-          ) : (
-            <div></div>
-          )}
-        </IonRow>
-      </IonGrid>
+      <IonContent>
+        <IonGrid>
+          <IonRow>
+            {notes.length ? (
+              notes.map((note, index) =>
+                note.pinned ? (
+                  <IonCol key={index} size="12">
+                    <IonCard className="announcementCard">
+                      <IonCardContent>
+                        <div className="card-div">
+                          <IonText className="ion-padding">{note.note}</IonText>
+                        </div>
+                        <IonCardSubtitle>- {note.author}</IonCardSubtitle>
+                      </IonCardContent>
+                    </IonCard>
+                  </IonCol>
+                ) : null
+              )
+            ) : (
+              <div></div>
+            )}
+          </IonRow>
+        </IonGrid>
+      </IonContent>
     </IonPage>
   );
 };
