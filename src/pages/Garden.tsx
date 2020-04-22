@@ -11,16 +11,18 @@ import {
   IonRow,
   IonCol,
 } from "@ionic/react";
-import "./Tab1.css";
+import "./Garden.css";
 import { firebase } from "../Utility/Firebase";
 import { construct } from "ionicons/icons";
 import GardenTasks from '../components/GardenTasks';
 
-const Tab1: React.FC = (props) => {
+const Garden: React.FC = (props) => {
   const [taskAmount, setTaskAmount] = useState<Number>(1);
   const [tasks, setTasks] = useState<firebase.firestore.DocumentData[]>([]);
 
   // onsnapshot == live updates
+
+  // TODO: Ret således at den kun tager dem med som ikke er "taken" i DB
   useEffect(() => {
     const unsub = firebase.getTasks().onSnapshot((snapshot) => {
       setTaskAmount(snapshot.size);
@@ -60,4 +62,4 @@ const Tab1: React.FC = (props) => {
   );
 };
 
-export default Tab1;
+export default Garden;

@@ -10,9 +10,9 @@ import {
   IonTabs,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import { ellipse, square, triangle, calendarOutline } from "ionicons/icons";
-import Tab1 from "./pages/Tab1";
-import Tab2 from "./pages/Tab2";
+import { square, leafOutline, megaphoneOutline } from "ionicons/icons";
+import Garden from "./pages/Garden";
+import Announcements from "./pages/Announcements";
 import Events from "./pages/Events";
 
 /* Core CSS required for Ionic components to work properly */
@@ -39,19 +39,19 @@ const App: React.FC = () => (
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
-          <Route path="/tab1" component={Tab1} exact={true} />
-          <Route path="/tab2" component={Tab2} exact={true} />
+          <Route path="/garden" component={Garden} exact={true} />
+          <Route path="/announcements" component={Announcements} exact={true} />
           <Route path="/events" component={Events} />
           <Route path="/" render={() => <Redirect to="/tab1" />} exact={true} />
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
-          <IonTabButton tab="tab1" href="/tab1">
-            <IonIcon icon={triangle} />
-            <IonLabel>Test</IonLabel>
+          <IonTabButton tab="tab1" href="/garden">
+            <IonIcon icon={leafOutline} />
+            <IonLabel>Garden</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="tab2" href="/tab2">
-            <IonIcon icon={ellipse} />
-            <IonLabel>Tab 2</IonLabel>
+          <IonTabButton tab="tab2" href="/announcements">
+            <IonIcon icon={megaphoneOutline} />
+            <IonLabel>Announcements</IonLabel>
           </IonTabButton>
           <IonTabButton tab="events" href="/events">
             <IonIcon icon={calendarOutline} />
