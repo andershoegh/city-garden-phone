@@ -19,6 +19,8 @@ import GardenTasks from "../components/GardenTasks";
 const Garden: React.FC = (props) => {
   const [taskAmount, setTaskAmount] = useState<Number>(1);
   const [tasks, setTasks] = useState<firebase.firestore.DocumentData[]>([]);
+  const [weatherData, setWeatherData] = useState<[]>([]);
+  const APICall = 'https://api.openweathermap.org/data/2.5/onecall?lat=57.02&lon=9.97&appid=2979ef06a8fd8560f008aabb2bba0406'
 
   // onsnapshot == live updates
 
@@ -42,6 +44,12 @@ const Garden: React.FC = (props) => {
       setTaskAmount(availableTasks);
       setTasks(tempArray);
     });
+
+     /*
+    fetch(APICall)
+      .then(res => res.json())
+      .then(result => setWeatherData(result));
+    */
     return () => {
       unsub();
     };
