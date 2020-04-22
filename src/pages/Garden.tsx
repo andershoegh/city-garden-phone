@@ -14,7 +14,7 @@ import {
 import "./Garden.css";
 import { firebase } from "../Utility/Firebase";
 import { construct } from "ionicons/icons";
-import GardenTasks from '../components/GardenTasks';
+import GardenTasks from "../components/GardenTasks";
 
 const Garden: React.FC = (props) => {
   const [taskAmount, setTaskAmount] = useState<Number>(1);
@@ -25,13 +25,22 @@ const Garden: React.FC = (props) => {
   // TODO: Ret således at den kun tager dem med som ikke er "taken" i DB
   useEffect(() => {
     const unsub = firebase.getTasks().onSnapshot((snapshot) => {
-      setTaskAmount(snapshot.size);
+      //setTaskAmount(snapshot.size);
       let tempArray: firebase.firestore.DocumentData[];
       tempArray = [];
-      snapshot.forEach(doc => {
+      snapshot.forEach((doc) => {
         tempArray = [...tempArray, doc.data()];
       });
-      setTasks(tempArray)
+
+      let availableTasks: number;
+      availableTasks = 0;
+      tempArray.forEach((task) => {
+        if (task.taskTaken === false) {
+          availableTasks += 1;
+        }
+      });
+      setTaskAmount(availableTasks);
+      setTasks(tempArray);
     });
     return () => {
       unsub();
@@ -56,7 +65,7 @@ const Garden: React.FC = (props) => {
             </IonCard>
           </IonCol>
         </IonRow>
-          <GardenTasks tasks={tasks} />
+        <GardenTasks tasks={tasks} />
       </IonGrid>
     </IonPage>
   );

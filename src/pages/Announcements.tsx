@@ -34,15 +34,15 @@ const Announcements: React.FC = () => {
       <IonGrid>
         <IonRow>
           {notes.length ? (
-            notes.map((note) =>
+            notes.map((note, index) =>
               note.pinned ? (
-                <IonCol size="12">
-                  <IonCard>
+                <IonCol key={index} size="12">
+                  <IonCard className="announcementCard">
                     <IonCardContent>
                       <div className="card-div">
                         <IonText className="ion-padding">{note.note}</IonText>
                       </div>
-                      <IonCardSubtitle>{note.author}</IonCardSubtitle>
+                      <IonCardSubtitle>- {note.author}</IonCardSubtitle>
                     </IonCardContent>
                   </IonCard>
                 </IonCol>

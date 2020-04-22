@@ -10,7 +10,7 @@ import {
   IonTabs,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import { square, leafOutline, megaphoneOutline } from "ionicons/icons";
+import { leafOutline, megaphoneOutline, calendarOutline } from "ionicons/icons";
 import Garden from "./pages/Garden";
 import Announcements from "./pages/Announcements";
 import Events from "./pages/Events";
@@ -42,7 +42,11 @@ const App: React.FC = () => (
           <Route path="/garden" component={Garden} exact={true} />
           <Route path="/announcements" component={Announcements} exact={true} />
           <Route path="/events" component={Events} />
-          <Route path="/" render={() => <Redirect to="/tab1" />} exact={true} />
+          <Route
+            path="/"
+            render={() => <Redirect to="/garden" />}
+            exact={true}
+          />
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
           <IonTabButton tab="tab1" href="/garden">
