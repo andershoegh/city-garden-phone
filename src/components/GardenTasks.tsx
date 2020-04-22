@@ -29,7 +29,7 @@ const GardenTasks: React.FC<GardenTasksProps> = props => {
 
   return (
     <>
-      {tasksDoing ? 
+      {tasksDoing.length !== 0 ? 
         <IonRow>
           <IonCol>
             <IonCard>

@@ -10,9 +10,9 @@ import {
   IonTabs,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import { leafOutline, megaphoneOutline, calendarOutline } from "ionicons/icons";
 import Garden from "./pages/Garden";
 import Announcements from "./pages/Announcements";
+import { leafOutline, megaphoneOutline, calendarOutline } from "ionicons/icons";
 import Events from "./pages/Events";
 
 /* Core CSS required for Ionic components to work properly */
@@ -49,7 +49,7 @@ const App: React.FC = () => (
           />
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
-          <IonTabButton tab="tab1" href="/garden">
+          <IonTabButton tab="garden" href="/garden">
             <IonIcon icon={leafOutline} />
             <IonLabel>Garden</IonLabel>
           </IonTabButton>

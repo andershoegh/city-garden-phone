@@ -17,7 +17,6 @@ interface EventProps {
 export const Event: React.FC<EventProps> = props => {
   const { event } = props;
   const [openSignUp, setOpenSignUp] = useState<boolean>(false);
-  const message = 'To sign up for ' + event.title + ' please enter your full name.';
 
   const date = Intl.DateTimeFormat('en-GB', {day: 'numeric', month: 'numeric'}).format(event.startTime.toDate());
   const startTime = Intl.DateTimeFormat('en-GB', {hour: '2-digit', minute: '2-digit'}).format(event.startTime.toDate());
