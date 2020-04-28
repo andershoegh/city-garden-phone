@@ -7,8 +7,8 @@ import {
   IonCardHeader,
   IonIcon,
   IonCardSubtitle,
-  IonText,
 } from "@ionic/react";
+import '../pages/Garden.css';
 import { leafOutline } from "ionicons/icons";
 
 interface GardenTasksProps {
@@ -26,31 +26,24 @@ const GardenTasks: React.FC<GardenTasksProps> = (props) => {
     }
   });
 
-  let taskString = "";
-  tasksDoing.forEach((task, index) => {
-    if (index < tasksDoing.length - 2) {
-      taskString += task + ", ";
-    } else if (index === tasksDoing.length - 2) {
-      taskString += task + " and ";
-    } else {
-      taskString += task;
-    }
-  });
-
   return (
     <>
       {tasksDoing.length !== 0 ? (
         <IonRow>
-          <IonCol>
+          <IonCol className='col'>
             <IonCard>
               <IonCardHeader className="card-div">
                 <IonIcon className="icon" icon={leafOutline}></IonIcon>
               </IonCardHeader>
-              <IonCardContent className="card-div">
+              <IonCardContent className="card-div ion-no-margin ion-no-padding">
                 <IonCardSubtitle>People are currently</IonCardSubtitle>
               </IonCardContent>
               <IonCardContent>
-                <IonText>{taskString}</IonText>
+                <ul>
+                  {tasksDoing.map((task, index) => (
+                    <li key={index}>{task}</li>
+                  ))}
+                </ul>
               </IonCardContent>
             </IonCard>
           </IonCol>

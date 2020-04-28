@@ -2,12 +2,46 @@ ion-content ion-toolbar {
   --background: translucent;
 }
 
+.col {
+  display: flex;
+  justify-content: center;
+}
+
 .card-div {
   display: flex;
   justify-content: center;
+  width: 80vw;
 }
 
 .icon {
   height: 50px;
   width: 50px;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-flow: wrap column;
+  align-content: center;
+}
+
+.alert-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4%;
+  width: 80vw;
+}
+
+.alert-icon {
+  padding: 0;
+  margin: 0 4% 0 0;
+  display: inline-block;
+}
+
+.alert-text {
+  padding: 0;
+  margin: 0;
+  display: inline;
 }

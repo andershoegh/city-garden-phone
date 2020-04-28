@@ -13,14 +13,17 @@ import {
 } from "@ionic/react";
 import "./Garden.css";
 import { firebase } from "../Utility/Firebase";
-import { construct } from "ionicons/icons";
+import { construct, alert } from "ionicons/icons";
 import GardenTasks from "../components/GardenTasks";
 
 const Garden: React.FC = (props) => {
   const [taskAmount, setTaskAmount] = useState<Number>(1);
   const [tasks, setTasks] = useState<firebase.firestore.DocumentData[]>([]);
-  const [weatherData, setWeatherData] = useState<[]>([]);
-  const APICall = 'https://api.openweathermap.org/data/2.5/onecall?lat=57.02&lon=9.97&appid=2979ef06a8fd8560f008aabb2bba0406'
+  const [showFrostCard, setShowFrostCard] = useState<boolean>(false);
+  const [showWindCard, setShowWindCard] = useState<boolean>(false);
+  const APICall = 'https://api.openweathermap.org/data/2.5/onecall?lat=57.02&lon=9.97&units=metric&appid=2979ef06a8fd8560f008aabb2bba0406'
+  const MIN_TEMP = 0;
+  const MAX_WIND_SPEED = 14;
 
   // onsnapshot == live updates
 
@@ -45,11 +48,20 @@ const Garden: React.FC = (props) => {
       setTasks(tempArray);
     });
 
-     /*
     fetch(APICall)
       .then(res => res.json())
-      .then(result => setWeatherData(result));
-    */
+      .then(result => {
+        result.hourly.forEach((hour: { temp: number; wind_speed: number; }) => {
+          if (hour.temp < MIN_TEMP) {
+            setShowFrostCard(true);
+          }
+
+          if (hour.wind_speed > MAX_WIND_SPEED) {
+            setShowWindCard(true);
+          }
+        })
+      });
+  
     return () => {
       unsub();
     };
@@ -58,8 +70,36 @@ const Garden: React.FC = (props) => {
   return (
     <IonPage>
       <IonGrid>
-        <IonRow>
-          <IonCol>
+        <IonRow className='grid'>
+          {showFrostCard ?
+            <IonCol className='col'>
+              <IonCard className='alert-card'>
+                <IonCardHeader className='alert-icon'>
+                  <IonIcon className='icon' icon={alert} />
+                </IonCardHeader>
+                <IonCardContent className='alert-text'>
+                  <IonCardSubtitle>
+                    We will experience frost degrees during the coming two days. Please cover garden boxes with frost intolerant vegetables.
+                  </IonCardSubtitle>
+                </IonCardContent>
+              </IonCard>
+            </IonCol>
+          : null}
+          {showWindCard ?
+            <IonCol className='col'>
+              <IonCard className='alert-card'>
+                <IonCardHeader className='alert-icon'>
+                  <IonIcon className='icon' icon={alert} />
+                </IonCardHeader>
+                <IonCardContent className='alert-text'>
+                  <IonCardSubtitle>
+                    We will experience high wind during the coming two days. Please cover garden boxes with fragile vegetables.
+                  </IonCardSubtitle>
+                </IonCardContent>
+              </IonCard>
+            </IonCol>
+          : null}
+          <IonCol className='col'>
             <IonCard>
               <IonCardHeader className="card-div">
                 <IonIcon className="icon" icon={construct}></IonIcon>
