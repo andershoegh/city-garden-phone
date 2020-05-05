@@ -1,32 +1,35 @@
 import React, { useState } from 'react';
 import { timeOutline, personOutline } from 'ionicons/icons';
-import { 
-  IonCard, 
-  IonCardContent, 
-  IonIcon, 
-  IonList, 
-  IonButton, 
-  IonModal 
-} from '@ionic/react';
+import { IonCard, IonCardContent, IonIcon, IonList, IonButton, IonModal } from '@ionic/react';
 import EventSignUp from './EventSignUp';
 
 interface EventProps {
   event: firebase.firestore.DocumentData;
 }
 
-export const Event: React.FC<EventProps> = props => {
+export const Event: React.FC<EventProps> = (props) => {
   const { event } = props;
   const [openSignUp, setOpenSignUp] = useState<boolean>(false);
 
-  const date = Intl.DateTimeFormat('en-GB', {day: 'numeric', month: 'numeric'}).format(event.startTime.toDate());
-  const startTime = Intl.DateTimeFormat('en-GB', {hour: '2-digit', minute: '2-digit'}).format(event.startTime.toDate());
-  const endTime = Intl.DateTimeFormat('en-GB', {hour: '2-digit', minute: '2-digit'}).format(event.endTime.toDate());
+  const date = Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'numeric' }).format(
+    event.startTime.toDate()
+  );
+  const startTime = Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit' }).format(
+    event.startTime.toDate()
+  );
+  const endTime = Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit' }).format(
+    event.endTime.toDate()
+  );
 
   const attendees = event.attendees.sort((a: string, b: string) => {
-    if(a.toLowerCase() < b.toLowerCase()) { return -1; };
-    if(a.toLowerCase() > b.toLowerCase()) { return 1; };
+    if (a.toLowerCase() < b.toLowerCase()) {
+      return -1;
+    }
+    if (a.toLowerCase() > b.toLowerCase()) {
+      return 1;
+    }
     return 0;
-  })
+  });
 
   return (
     <>
@@ -50,18 +53,18 @@ export const Event: React.FC<EventProps> = props => {
               <span>Attendees</span>
             </div>
             <IonList className='event-list'>
-              {attendees.length !== 0 ?
-                attendees.map((attendee: string, index: number) => (
-                  <div key={index} className='event-list-item'>
-                    {attendee}
-                  </div>
-                ))
-              :
-              <div className='event-list-item'>No on has signed up to attend this event yet</div>}
+              <div className='event-list-item'>{event.organizer}</div>
+              {attendees.length !== 0
+                ? attendees.map((attendee: string, index: number) => (
+                    <div key={index} className='event-list-item'>
+                      {attendee}
+                    </div>
+                  ))
+                : null}
             </IonList>
             <div className='sign-up-btn'>
               <IonButton size='small' onClick={() => setOpenSignUp(true)}>
-                  Sign up
+                Sign up
               </IonButton>
             </div>
           </div>
@@ -69,6 +72,6 @@ export const Event: React.FC<EventProps> = props => {
       </IonCard>
     </>
   );
-}
+};
 
 export default Event;
