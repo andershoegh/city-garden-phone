@@ -3,5 +3,6 @@ ion-content ion-toolbar {
 }
 
 .announcementCard {
-  margin-bottom: 0px;
+  margin: 18px auto;
+  width: 80vw;
 }
