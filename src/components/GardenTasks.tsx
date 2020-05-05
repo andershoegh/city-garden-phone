@@ -21,7 +21,7 @@ const GardenTasks: React.FC<GardenTasksProps> = (props) => {
   let tasksDoing: string[];
   tasksDoing = [];
   tasks.forEach((task) => {
-    if (!tasksDoing.includes(task.taskTemplateId)) {
+    if (task.taskTaken && !tasksDoing.includes(task.taskTemplateId)) {
       tasksDoing.push(task.taskTemplateId);
     }
   });
