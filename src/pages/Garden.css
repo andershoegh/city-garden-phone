@@ -45,3 +45,7 @@ ul {
   margin: 0;
   display: inline;
 }
+
+.task-list {
+  text-transform: capitalize;
+}

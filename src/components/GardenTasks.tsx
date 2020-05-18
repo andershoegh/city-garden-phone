@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   IonCol,
   IonRow,
@@ -7,9 +7,9 @@ import {
   IonCardHeader,
   IonIcon,
   IonCardSubtitle,
-} from "@ionic/react";
+} from '@ionic/react';
 import '../pages/Garden.css';
-import { leafOutline } from "ionicons/icons";
+import { leafOutline } from 'ionicons/icons';
 
 interface GardenTasksProps {
   tasks: firebase.firestore.DocumentData[];
@@ -22,7 +22,11 @@ const GardenTasks: React.FC<GardenTasksProps> = (props) => {
   tasksDoing = [];
   tasks.forEach((task) => {
     if (task.taskTaken && !tasksDoing.includes(task.taskTemplateId)) {
-      tasksDoing.push(task.taskTemplateId);
+      if (task.taskTemplateId === 'dirtTurning') {
+        tasksDoing.push('Loosening soil');
+      } else {
+        tasksDoing.push(task.taskTemplateId);
+      }
     }
   });
 
@@ -32,16 +36,18 @@ const GardenTasks: React.FC<GardenTasksProps> = (props) => {
         <IonRow>
           <IonCol className='col'>
             <IonCard>
-              <IonCardHeader className="card-div">
-                <IonIcon className="icon" icon={leafOutline}></IonIcon>
+              <IonCardHeader className='card-div'>
+                <IonIcon className='icon' icon={leafOutline}></IonIcon>
               </IonCardHeader>
-              <IonCardContent className="card-div ion-no-margin ion-no-padding">
+              <IonCardContent className='card-div ion-no-margin ion-no-padding'>
                 <IonCardSubtitle>People are currently</IonCardSubtitle>
               </IonCardContent>
               <IonCardContent>
                 <ul>
                   {tasksDoing.map((task, index) => (
-                    <li key={index}>{task}</li>
+                    <li key={index} className='task-list'>
+                      {task}
+                    </li>
                   ))}
                 </ul>
               </IonCardContent>
