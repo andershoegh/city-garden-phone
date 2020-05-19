@@ -49,3 +49,7 @@ ul {
 .task-list {
   text-transform: capitalize;
 }
+
+.card {
+  margin-bottom: 0px;
+}

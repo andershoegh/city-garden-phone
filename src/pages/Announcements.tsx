@@ -40,9 +40,9 @@ const Announcements: React.FC = () => {
                 note.pinned ? (
                   <IonCol key={index} size="12">
                     <IonCard className="announcementCard">
-                      <IonCardContent>
-                        <div className="card-div">
-                          <IonText className="ion-padding">{note.note}</IonText>
+                      <IonCardContent className="ion-padding">
+                        <div style={{ padding: "0 10px 15px 10px" }}>
+                          <IonText>{note.note}</IonText>
                         </div>
                         <IonCardSubtitle>- {note.author}</IonCardSubtitle>
                       </IonCardContent>
